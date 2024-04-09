@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "./App.css";
 
 interface Pet {
   name: string;
@@ -7,6 +8,7 @@ interface Pet {
   happiness: number;
   hunger: number;
   energy: number;
+  imageUrl: string; // Added this in for a visual per pet
 }
 
 enum ActionType {
@@ -15,10 +17,11 @@ enum ActionType {
   Rest,
 }
 
-const VirtualPetGame: React.FC = () => {
+const bbPetApp: React.FC = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [pets, setPets] = useState<Pet[]>([]);
 
-  const adoptPet = (name: string, species: string, color: string): void => {
+  const adoptPet = (name: string, species: string, color: string, imageUrl: string): void => { // Updated adoptPet function
     const pet: Pet = {
       name,
       species,
@@ -26,6 +29,7 @@ const VirtualPetGame: React.FC = () => {
       happiness: 50,
       hunger: 50,
       energy: 50,
+      imageUrl, // Assign imageUrl to the pet object
     };
     setPets([...pets, pet]);
     console.log(`${name} the ${species} has been adopted!`);
@@ -66,7 +70,7 @@ const VirtualPetGame: React.FC = () => {
     if (pet.hunger <= 0 || pet.energy <= 0) {
       console.log(`${pet.name} is too tired or hungry!`);
     } else if (pet.happiness <= 0) {
-      console.log(`${pet.name} is unhappy!`);
+      console.log(`${pet.name} needs love!`);
     }
   };
 
@@ -74,6 +78,7 @@ const VirtualPetGame: React.FC = () => {
   const renderPets = (): JSX.Element[] => {
     return pets.map((pet, index) => (
       <div key={index}>
+        <img src={pet.imageUrl} alt={pet.name} style={{ width: '100px', height: '100px' }} /> {/* Render pet image */}
         <h2>{pet.name}</h2>
         <p>Species: {pet.species}</p>
         <p>Color: {pet.color}</p>
@@ -90,10 +95,14 @@ const VirtualPetGame: React.FC = () => {
   return (
     <div>
       <h1>Virtual Pet Game</h1>
-      <button onClick={() => adoptPet("Buddy", "Dog", "Brown")}>Adopt Pet</button>
+      <button onClick={() => adoptPet("Gok", "Pupper", "Gold", "images/Gok.png")}>Adopt Gok</button>
+      <button onClick={() => adoptPet("Bean", "Baby Dragon", "Black", "images/beanie.png")}>Adopt Bean</button>
+      <button onClick={() => adoptPet("Atticus", "Little Lion", "Slate Brown", "images/atti.png")}>Adopt Atticus</button>
+      <button onClick={()=> adoptPet("Dixie", "Loch Ness", "Dark Brown", "images/Dixie.png")}>Adopt Dixie</button>
+      <button onClick={()=> adoptPet("Olympe", "Snow Pupper", "White", "images/olympe.png")}>Adopt Olympe</button>
       {renderPets()}
     </div>
   );
 };
 
-export default VirtualPetGame;
+export default bbPetApp;
