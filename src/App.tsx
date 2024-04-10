@@ -21,7 +21,7 @@ const bbPetApp: React.FC = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [pets, setPets] = useState<Pet[]>([]);
 
-  const adoptPet = (name: string, species: string, color: string, imageUrl: string): void => { // Updated adoptPet function
+  const adoptPet = (name: string, species: string, color: string, imageUrl: string): void => { // Updated adoptPet function with image
     const pet: Pet = {
       name,
       species,
@@ -78,7 +78,7 @@ const bbPetApp: React.FC = () => {
   const renderPets = (): JSX.Element[] => {
     return pets.map((pet, index) => (
       <div key={index}>
-        <img src={pet.imageUrl} alt={pet.name} style={{ width: '100px', height: '100px' }} /> {/* Render pet image */}
+        <img src={pet.imageUrl} alt={pet.name} style={{ width: '100px', height: '100px' }} /> {/* Rendering the bubs images here */}
         <h2>{pet.name}</h2>
         <p>Species: {pet.species}</p>
         <p>Color: {pet.color}</p>
